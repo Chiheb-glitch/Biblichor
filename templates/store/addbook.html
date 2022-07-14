@@ -1,0 +1,19 @@
+<h1>Add book</h1>
+
+
+
+
+<form  action="{% url 'Add_book' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form.book_name}}
+			{{form.book_writer}}
+			{{ form.description }}
+			{{form.price}}
+			{{form.code_a_barre}}
+			{{form.picture}}
+			{{form.category}}
+
+			
+					        <button type="submit" class="btn btn-primary btn-block"> ADD  </button>
+
+			</form>

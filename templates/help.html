@@ -1,0 +1,498 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'style.css' %}" />
+	<link href="{% static './img/logo/Biblichor.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+  />
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+    rel="stylesheet"
+  />
+    <link href="{% static 'assets/css/csshelp.css' %}" rel="stylesheet" />
+    <title>Help</title>
+</head>
+<style>
+    	@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap');
+</style>
+<body>
+    {% include 'includes/navbar.html' %}
+
+
+
+
+ <div class="container" style="
+ background-repeat: no-repeat;
+ text-align: center;
+ display: flex;
+ height: 600px;
+ background-size: 1400px;
+ background-image: url('{% static './img/Illustration/help.svg ' %}');
+">
+  <div class="col"style="
+  top: 25%;
+  left: 10%;
+">
+   <h2 style="font-family:'Garamond' ;
+             font-weight:700;
+              font: size 32px;
+              color:#D6955B; "> Gagner de l’argent</h2>
+   <p  style="
+   margin-right: 20%;
+   margin-left: 20%;
+   font-family: 'Garamond';
+   font-weight: 400;
+   font-size: 24px;
+   color: #226D68;
+
+">
+    En prêtant vos livres, vous gagnez plus d’argent et facilitez l'accès aux livres aux autres lecteurs.
+
+   </p>
+  </div>
+  <div class="col" style="
+  top: 25%;
+"> 
+    <h2 style="font-family:'Garamond' ;
+    font-weight:700;
+     font: size 32px;
+     color:#D6955B; ">  Frais de transaction
+</h2>
+    <p  style="
+    margin-right: 25%;
+    margin-left: 25%;
+    font-family: 'Garamond';
+    font-weight: 400;
+    font-size: 24px;
+    color: #226D68;
+ 
+ ">
+    
+      Une fois acheté, il y a une petite commission et des frais de traitement de paiement par carte de crédit standard.
+
+    </p>
+  </div>
+ </div>
+<div class="container">
+
+    <div class="text" style="text-align:center ;
+    color:#18534f;
+    
+    padding-top: 2%;
+    font-family:'Garamond';"
+     >
+     <h1 style=" font-family:'Garamond';
+              font-weight: 700;
+              font-size: 40px;
+              margin-bottom: 10%;"> Simple, Efficace et Sécurisé..
+   </h1>
+    
+     
+     
+     <p class="lead my-4" style="
+     margin-right: 25%;
+     margin-left: 25%;
+     font-family: 'Garamond';
+     font-weight: 400;
+     font-size: 24px;
+     color: #226D68;
+  
+  ">
+      Biblichor vous permet de partager le plaisir de lire avec vos amis, votre famille et vos communautés en toute sécurité. Prêtez, empruntez, retrouvez vos livres papiers préférés.
+</p>
+   </div>
+</div>
+
+
+    
+<div class="text" style="text-align:center ;
+color:#18534f;
+
+padding-top: 2%;
+font-family:'Garamond';"
+ >
+ <h1 style=" font-family:'Garamond';
+          font-weight: 700;
+          font-size: 40px;"> Louez vos livres en toute simplicité
+ </h1>
+
+ 
+<hr style="border-top:1px solid #D6955B ; margin-left:20%;margin-right:20%;" />
+
+
+</div>
+<div class="container">
+    <div class="row" style="padding: 5%;">
+        <div class="col">
+            <h1 style="font-family: 'Roboto';
+                      font-weight:600;
+                      font-size:32px">01. Je me connecte et j'ajoute mes livres sur Biblichor
+
+
+               </h1>
+
+               <p style="font-family: 'Roboto';
+               font-weight:400;
+               font-size:20px">
+               Répertoriez vos livres dans votre bibliothèque en ligne, et partagez-les à vos amis en toute confiance grâce à notre plateforme.
+
+               </p>
+        </div>
+        <div class="col">
+            <h1 style="font-family: 'Roboto';
+            font-weight:600;
+            font-size:32px">03. Je peux gérer mes prêts et mes emprunts
+
+
+              </h1>
+              <p style="font-family: 'Roboto';
+              font-weight:400;
+              font-size:20px">
+               Ne cherchez plus où sont passés vos livres ! La section "mes prêts" vous permet de savoir à qui et quand vous avez prêté ce livre et même de relancer à qui vous avez prêté par mail pour qu’il vous le rende.
+
+
+              </p>
+        </div>
+    </div>
+    <div class="row"  style="padding: 5%;" >
+        <div class="col">
+            <h1 style="font-family: 'Roboto';
+                      font-weight:600;
+                      font-size:32px">
+02. Je mets mes ouvrages à prêter  
+
+            </h1>
+            <p style="font-family: 'Roboto';
+            font-weight:400;
+            font-size:20px">
+              Explorez les bibliothèques de vos amis pour leur emprunter votre nouveau livre préféré. Et prêtez les vôtres en toute sécurité !
+
+
+            </p>
+        </div>
+        <div class="col">
+            <h1 style="font-family: 'Roboto';
+                      font-weight:600;
+                      font-size:32px">
+              04. Je gagne de l'argent
+
+
+            </h1>
+
+            <p style="font-family: 'Roboto';
+            font-weight:400;
+            font-size:20px">
+               Prêtez vos livres à vos amis pour que vous puissiez gagner de l'argent. Et économisez plus grâce à notre plateforme puisque vous empruntez des livres à moindre prix.
+
+
+            </p>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<div class="text" style="text-align:center ;
+color:#18534f;
+
+padding-top: 2%;
+font-family:'Garamond';"
+ >
+ <h1 style=" font-family:'Garamond';
+          font-weight: 700;
+          font-size: 40px;"> Foire Aux Questions </h1>
+
+ 
+<hr style="border-top:1px solid #D6955B ; margin-left:20%;margin-right:20%;" />
+
+
+</div>
+
+    <!-- Question Accordion -->
+    <section id="questions" class="p-5">
+        <div class="container">
+          
+          <div class="accordion accordion-flush" id="questions">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-one"
+                >
+                  Combien de livres puis-je prêter?
+
+                </button>
+              </h2>
+              <div
+                id="question-one"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+                  
+               Vous pouvez prêter jusqu'à 3 livres par mois.
+
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-two"
+                >
+                  Pourquoi devrais-je louer mes livres?
+
+                </button>
+              </h2>
+              <div
+                id="question-two"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+                  En louant vos livres, vous permettez aux autres utilisateurs d’accéder facilement aux livres. De plus, vous générez plus d'argent en prêtant vos propres livres. 
+
+                </div>
+              </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-three"
+                >
+                  Comment est-ce que je loue mes livres?
+                </button>
+              </h2>
+              <div
+                id="question-three"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+               Après avoir créé et vérifié votre compte, vous pouvez proposer vos livres à louer. Pour cela, vous devrez signer une entente de location pour officialiser votre engagement à rapporter le livre à la date prévue. Ensuite, vous payez le propriétaire soit en ligne, soit en face à face lorsque vous le rencontrez pour récupérer le livre. Le prêt s’effectue pour une durée bien déterminée. Une fois écoulée, vous rapporterez le livre dans le même état dans lequel vous l’avez reçu.  
+                </div>
+              </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-four"
+                >
+                 Combien de fois dois-je remplir l'entente de location?
+
+                </button>
+              </h2>
+              <div
+                id="question-four"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+                   Bonne question. Vous devrez remplir une nouvelle entente lors de chaque transaction. Si vous louez deux livres en même temps, une seule entente suffira. Mais si vous revenez plus tard pour louer un autre livre, on vous demandera de remplir une autre entente.
+
+                </div>
+              </div>
+            </div>
+            <!-- Item 5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-five"
+                >
+                  Comment puis-je payer les frais de location?
+
+                </button>
+              </h2>
+              <div
+                id="question-five"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+             Vous pouvez payer par carte bancaire, par carte E-dinar, par chèque, ou en argent comptant. Par contre, si vous ne rapportez pas vos livres à la date de retour prévue, les frais seront portés à la carte de crédit dont vous avez donné le numéro sur l'entente de location.
+
+                </div>
+              </div>
+            </div>
+              <!-- Item 6 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-six"
+                >
+                 Super. Mais qu'est-ce qui se passe si je ne rapporte pas les livres à leur(s) propriétaire(s)?
+
+
+                </button>
+              </h2>
+              <div
+                id="question-six"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+      Si vous n'avez pas rapporté les livres à la date de retour, nous porterons des frais de non retour. Après tout, quand on loue quelque chose, ce n'est pas pour la vie! 
+
+
+                </div>
+              </div>
+            </div>
+              <!-- Item 5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-y"
+                >
+                  Quelle bonne idée! Je peux louer tous mes livres?
+
+                </button>
+              </h2>
+              <div
+                id="question-y"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+             Bien sûr! Vous pouvez mettre tous vos livres à louer pour faciliter la recherche aux autres et gagner plus d'argent.
+
+                </div>
+              </div>
+            </div>
+              <!-- Item 5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-x"
+                >
+                 Comment puis-je identifier les livres qui sont à louer.
+
+                </button>
+              </h2>
+              <div
+                id="question-x"
+                class="accordion-collapse collapse"
+                data-bs-parent="#questions"
+              >
+                <div class="accordion-body">
+           Voir s'il y a une étiquette  << À LOUER >> sur la photo du livre. Simple comme bonjour!
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <div class="text" style="text-align:center ;
+      color:#18534f;
+      
+      padding-top: 2%;
+      font-family:'Garamond';"
+       >
+       <h1 style=" font-family:'Roboto';
+                font-weight: 700;
+                font-size: 40px;"> Vous avez besoin d’aide.. </h1>
+      
+       <p style="font-size:20px;"> Nous nous engageons à aider nos utilisateurs à prospérer avec un soutien.</p>
+      <hr style="border-top:1px solid #D6955B ; margin-left:20%;margin-right:20%;" />
+  
+  
+   </div>
+
+   <div class="container" style="text-align: center;">
+ <div class="row">
+    <div class="col" style="display:flex;text-align: initial;">
+        <div class="col">
+            <img  style="height:250px" src="{% static './icon/contact.png' %}">
+        </div>
+        <div class="col">
+            <h1 style="font-family:'Roboto' ;
+               font-weight:400;
+               font-size: 37.5px;">
+                Contactez-nous 
+            </h1>
+            <p  style="font-family: 'Roboto';
+                  font-weight:400;
+                  font-size: 20px;
+                  ">
+                Contactez notre équipe d'assistance par e-mail chaque fois que vous avez une question.
+            </p>
+        </div>
+    </div>
+ 
+    <div class="col" style="display:flex;text-align: initial;">
+        <div class="col">
+            <img style="height:250px;" src="{% static './icon/healp.png' %}">
+        </div>
+        <div class="col">
+            <h1 style="font-family:'Roboto' ;
+               font-weight:400;
+               font-size: 37.5px;">
+Conseils            </h1>
+            <p  style="font-family: 'Roboto';
+                  font-weight:400;
+                  font-size: 20px;
+                  ">
+               Posez de questions et trouvez une communauté de lecteurs passionnés comme vous.
+
+            </p>
+        </div>
+    </div>
+</div>
+
+
+   </div>
+  
+
+
+      <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+</body>
+</html>

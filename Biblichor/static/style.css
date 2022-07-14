@@ -1,0 +1,95 @@
+body {
+	font-family: "Roboto Condensed", sans-serif;
+	overflow-x: hidden;
+}
+body {
+	background-color: #ecf8f6;
+}
+
+.hi-slide {
+	position: relative;
+	width: 754px;
+	height: 292px;
+	margin: 0px auto 0;
+}
+
+.hi-slide .hi-next,
+.hi-slide .hi-prev {
+	position: absolute;
+	top: 50%;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	border-radius: 50px;
+
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+	background-color: #ab7749;
+	color: #ecf8f6;
+	transition: all 0.6s;
+	font-size: 20px;
+	font-weight: bold;
+}
+.hi-slide .hi-next:hover,
+.hi-slide .hi-prev:hover {
+	opacity: 1;
+	background-color: #ab7749;
+}
+
+.hi-slide .hi-prev {
+	left: -60px;
+}
+
+.hi-slide .hi-prev::before {
+	content: "<";
+}
+.hi-slide .hi-next {
+	right: -60px;
+}
+.hi-slide .hi-next::before {
+	content: ">";
+}
+
+.hi-slide > ul {
+	list-style: none;
+	position: relative;
+	width: 900px;
+	height: 292px;
+	margin: 0;
+	padding: 0;
+}
+
+.hi-slide > ul > li {
+	overflow: hidden;
+	position: absolute;
+	z-index: 0;
+	left: 377px;
+	top: 146px;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background-color: #ecf8f6;
+	cursor: pointer;
+}
+
+.img img {
+	width: 100%;
+	height: 100%;
+	box-shadow: 5px 2px 10px #00000039;
+}
+.img {
+	margin: 30px;
+}
+.shelf {
+	background-color: #ab7749;
+	width: 100%;
+	height: 20px;
+}
+.shelf-shadow {
+	background-color: #feeaa1;
+	width: 100%;
+	height: 9px;
+}
