@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 def home (request):
 
-	return render (request ,'home.html')
+	return render (request ,'Home.html')
 def help (request):
 	return render (request ,'help.html')
 def underconst (request):
