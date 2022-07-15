@@ -170,9 +170,11 @@ footer hr {
 	opacity: 0.8;
 }
 
-
+	.imghelp{
+		height: 250px;
+	}
 #show1{
-	top: 45%;
+	top: 35%;
 	left: 10%;
 }
 #showp{
@@ -200,7 +202,7 @@ footer hr {
 
 
 	.imghelp{
-		height: 250px;
+		height: 60%;
 	}
 	@media screen and (max-width: 600px) {
 		.imghelp{
