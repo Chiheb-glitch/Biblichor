@@ -93,3 +93,16 @@ body {
 	width: 100%;
 	height: 9px;
 }
+._show{
+	display: none;
+}
+@media screen and (max-width: 600px) {
+	.hi-slide{
+		display: none;
+	}
+	._show{
+		display: inline-flex;
+	}
+  }
+
+

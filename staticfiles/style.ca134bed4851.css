@@ -93,16 +93,21 @@ body {
 	width: 100%;
 	height: 9px;
 }
-._show{
+.show{
 	display: none;
 }
 @media screen and (max-width: 600px) {
 	.hi-slide{
 		display: none;
 	}
-	._show{
+	.show{
 		display: inline-flex;
 	}
   }
 
+@media screen and (max-width: 600px) {
+	.ml-auto{
+		margin-left: 0px !important;
+	}
+  }
 

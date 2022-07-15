@@ -184,7 +184,7 @@ footer hr {
 	color: #226D68;
 }
 @media screen and (max-width: 600px) {
-	#show{
+	#show1{
 		top: 10%;
 	}
 	#showp{
@@ -193,17 +193,4 @@ footer hr {
 		font-size: 20px;
 		background-color: #84a6a416;
 	}
-	#show1{
-	top: 10%;
-	lef
 	}
-
-
-	.imghelp{
-		height: 250px;
-	}
-	@media screen and (max-width: 600px) {
-		.imghelp{
-			height: 20%;
-		}
-		}
