@@ -1,4 +1,5 @@
 {% load  static %}
+
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap');
@@ -11,6 +12,94 @@ font-weight: 400;
 }
 
 
+    .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 400%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: #f1f1f1}
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+#hero .btn-get-started {
+    font-family: "montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 3px;
+    transition: 0.5s;
+    margin-top: 30px;
+    text-align: center;
+    color: #fff;
+    background: #3b2d85;
+    width: 200px;
+}
+#hero .btn-get-started:hover {
+    background: #e2574c;
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(21,83,79, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+#acbtn{
+	width: 140px;
+}
+
+.iconnavbar{
+margin-right: 2px;
+padding: 0;
+}
+
+a:hover {
+	color: #f8a41e;
+	text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+	#navicon{
+		position: absolute;
+		top: 0;
+		right: 10px;
+	}
+	.navbar-collapse{
+		background: #ecf8f6;
+		padding-top: 0%;
+		text-align: center;
+	}
+	#acbtn{
+		width: 100%;
+	}
+	.iconnavbar{
+margin-right: 0;
+}
+
+.padnavbar{
+
+	border-bottom: 2px solid;
+	padding-bottom: 4% ;
+	padding-top: 10%;
+}
+
+  }
+
 
 
 </style>
@@ -22,13 +111,14 @@ font-weight: 400;
 	box-shadow: 0 4px 12px -2px #80808036;
 	z-index: 1;
 ">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		  <span style="background:#15534f;" class="navbar-toggler-icon"></span>
+		<button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
 		</button>
+
 		  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
 			  <ul class="navbar-nav mr-auto">
 				  <li class="nav-item navbar-brand  active">
-					  <a class="nav-link" href="{% url 'Home' %}"><img src="{% static './img/logo/Biblichor.png' %}"  style="height:50px ;"> </a>
+					  <a  id="navicon" class="nav-link" href="{% url 'Home' %}"><img src="{% static './img/logo/Biblichor.png' %}"  style="height:50px ;"> </a>
 				  </li>
 				 
 			  </ul>
@@ -36,32 +126,67 @@ font-weight: 400;
 		  <div class="navbar-collapse collapse  order-3 dual-collapse2">
 			<ul class="navbar-nav ">
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'Home' %}">Accueil</a>
+					<a class="nav-link padnavbar" href="{% url 'Home' %}">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'under' %}">Boutique</a>
+					<a class="nav-link padnavbar" href="{% url 'store' %}">Boutique</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'Help' %}">Aide</a>
+					<a class="nav-link padnavbar" href="{% url 'Help' %}">Aide</a>
 				</li>
 			</ul>
 		</div>
 		  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 			  <ul  class="navbar-nav ml-auto">
 				  <li class="nav-item">
-					  <a class="nav-link" href="{% url 'under' %}" style="padding: 0px; padding-right: 20px;"> <img style="height: 35px;" src="{% static './img/icon/wish-list-icon.png' %}"> </a>
+					  <a  class="nav-link  iconnavbar padnavbar" href="{% url 'under' %}"> <img style="height: 35px;" src="{% static './img/icon/wish-list-icon.png' %}"> </a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'under' %}" style="padding: 0px; padding-right: 15px;"><img style="height: 35px;" src="{% static './img/icon/shopping-cart.png' %}"></a>
+					<a class="nav-link  iconnavbar padnavbar" href="{% url 'under' %}" ><img style="height: 35px;" src="{% static './img/icon/shopping-cart.png' %}"></a>
 				</li>
-				  <li class="nav-item">
-					<a class="nav-link" href="{% url 'login' %}" style="
+				
+					{% if user.id is  None %} 
+					  <li class="nav-item">
+				
+
+					<a class="nav-link" href="{% url 'login' %}" id="acbtn"  style="
+					text-align: -webkit-center;
+					color: #ECF8F6;
+					background: #15534f;
+					border-radius: 5px;
+				">
+
+
+			Se Connecter</a>
+			{% else %}
+<!--
+					<a class="nav-link" href="{% url 'logout' %}" style="
 					text-align: -webkit-center;
 					color: #ECF8F6;
 					width: 140px;
 					background: #15534f;
 					border-radius: 5px;
-				">Se Connecter</a>
+				">-->
+
+			<div class="dropdown">
+            <a  class="getstarted scrollto nav-link"  id="acbtn" style="
+					text-align: -webkit-center;
+					color: #ECF8F6;
+					background: #15534f;
+					border-radius: 5px;
+				"> Account</a>
+            <div class="dropdown-content">
+                <a ><img src="{% static './icon/Purchase.png' %}" style="width:20px; margin: 5px;" alt="">Purchase & Reviews</a>
+                <a href="#"><img src="{% static './icon/settings.png' %}" style="width:20px; margin: 5px;" alt="">Account Settings</a>
+                <a href="{% url 'dashboard' %}"><img src="{% static './icon/dashboard.png' %}" style="width:20px; margin: 5px;" alt="">Dashboard</a>
+                <a href="{% url 'logout' %}"><img src="{% static './icon/sign-out.png' %}" style="width:20px; margin: 5px;" alt="">Sign Out</a>
+            </div>
+        </div>
+
+
+		
+
+			{% endif %}
 				  </li>
 			  </ul>
 		  </div>

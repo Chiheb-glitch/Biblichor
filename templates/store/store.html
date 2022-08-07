@@ -1,24 +1,621 @@
+{% load static %}
 
-{% for book in books %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    
+    <!-- jQuery -->
+    
+    <!-- Bootstrap4 files-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    
+   <link href="{% static './img/logo/Biblichor.png' %}" rel="shortcut icon" type="image/x-icon">
+
+        <title>Boutique</title>
+</head>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #ECF8F6;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #15534F;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #15534F;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #15534F;
+  background: #15534F;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
 
-	<div class="col-md-4">
-		<figure class="card card-product-grid">
-			<div class="img-wrap"> 
-				<a href="">
-				<img style="height: 150px" src="{{ book.picture.url }}">
-				</a>
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-				<div class="fix-height">
-					<a href="" class="title">{{ book.product_name }}</a>
-					<div class="price-wrap mt-2">
-						<span class="price">{{ book.price }} DT </span>
-					</div> <!-- price-wrap.// -->
+.pagination{
+	margin-left: 40%;
+}
+a{
+	color: #15534f;
+	font-family: 'roboto';
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 28.13px;
+}
+
+
+
+.portfolio .portfolio-item {
+	margin: 30px;
+	width: 300px;
+}
+/*hover effect*/
+.portfolio .portfolio-wrap {
+	transition: 0.01s;
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	z-index: 10;
+}
+.portfolio .portfolio-wrap::before {
+	content: "";
+	background: #ffffff27;
+	backdrop-filter: blur(2px);
+	position: absolute;
+	left: 100%;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	transition: all ease-in-out 0.3s;
+	z-index: 2;
+}
+.portfolio .portfolio-wrap img {
+	transition: 0.3s;
+	position: relative;
+	z-index: -10;
+}
+/*Add to cart btn*/
+.portfolio .portfolio-wrap .portfolio-links {
+	opacity: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 8;
+	position: absolute;
+	transition: all ease-in-out 0.3s;
+}
+.portfolio .portfolio-wrap .portfolio-links a {
+	color: #18534f;
+	line-height: 0;
+	background-color: #ecf8f6;
+	padding-top: 18px;
+	border-radius: 3px;
+	text-align: center;
+	width: 150px;
+	height: 20px;
+	display: inline-block;
+	transition: 0.3s;
+	text-decoration: none;
+}
+.portfolio .portfolio-wrap .portfolio-links a {
+	line-height: 0;
+	font-size: 20px;
+}
+.portfolio .portfolio-wrap .portfolio-links a:hover {
+	background: #18534f;
+	color: #ecf8f6;
+}
+.portfolio-wrap img {
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+}
+.portfolio .portfolio-wrap:hover::before {
+	left: 0;
+}
+.portfolio .portfolio-wrap:hover .portfolio-links {
+	opacity: 1;
+	top: calc(50% - 16px);
+}
+.portfolio .portfolio-wrap:hover {
+	opacity: 1;
+	bottom: 0;
+}
+.description .right  {
+	background-color: #18534fa9;
+	float: right;
+	margin-top: -100%;
+	margin-right: 10px;
+  border-radius:100px;
+  padding: 10px
+   }
+   .description .right img {
+	width: 20px;
+	height: 20px;  z-index: 2;
+    margin-bottom: -6px;
+   }
+.description .left {
+	margin-top: -130px;
+	margin-bottom: -10px;
+	margin-left: 10px;
+    color: #ecf8f6;
+}
+.description .left h4 {
+	margin-bottom: -10px;
+	padding-top: 10px;
+}
+.description {
+	background-color: #18534fa9;
+	height: 100%;
+    margin-bottom: 12%;
+}
+.col{
+    padding: 0;
+	margin-bottom: 5%;
+}
+.container-fluid{
+	padding-left: 5%;
+    margin-top: 13%;
+	padding-right: 5%;
+}
+
+
+
+
+
+
+
+
+.range-slider {
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	height: 6em;
+}
+
+.range-slider svg,
+.range-slider input[type=range] {
+	position: absolute;
+	left: 0;
+	margin-top: 5%;
+}
+
+input[type=number] {
+	border: 1px solid #15534f;
+	background: #ECF8F6;
+	text-align: center;
+	font-size: 1.6em;
+	-moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type=number]:invalid,
+input[type=number]:out-of-range {
+	border: 2px solid #cadedd;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: 100%;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #15534f;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+	background: #15534f;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+	background: #15534f;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 3px;
+	cursor: pointer;
+	animate: 0.2s;
+	background: #15534fba;
+	border-radius: 1px;
+	box-shadow: none;
+	border: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	z-index: 2;
+	position: relative;
+	box-shadow: 0px 0px 0px #000;
+	border: 1px solid #15534f;
+	height: 18px;
+	width: 18px;
+	border-radius: 25px;
+	background: #15534f;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -7px;
+}
+
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 5px;
+	cursor: pointer;
+	animate: 0.2s;
+	background: #15534f;
+	border-radius: 1px;
+	box-shadow: none;
+	border: 0;
+}
+
+input[type=range]::-moz-range-thumb {
+	z-index: 2;
+	position: relative;
+	box-shadow: 0px 0px 0px #000;
+	border: 1px solid #15534f;
+	height: 18px;
+	width: 18px;
+	border-radius: 25px;
+	background: #15534f;
+	cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+	width: 100%;
+	height: 5px;
+	cursor: pointer;
+	animate: 0.2s;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+input[type=range]::-ms-fill-lower,
+input[type=range]::-ms-fill-upper {
+	background: #15534f;
+	border-radius: 1px;
+	box-shadow: none;
+	border: 0;
+}
+
+input[type=range]::-ms-thumb {
+	z-index: 2;
+	position: relative;
+	box-shadow: 0px 0px 0px #000;
+	border: 1px solid #15534f;
+	height: 18px;
+	width: 18px;
+	border-radius: 25px;
+	background: #15534f;
+	cursor: pointer;
+}
+.card-header{
+	padding: 0;
+}
+
+
+</style>
+<body>
+	{% include 'includes/navbar.html' %}
+	<form action="{% url 'search' %}" class="search" method="GET" style="margin-top: 5%;">
+    <div class="wrap">
+        <div class="search">
+           <input name="keyword" type="text" class="searchTerm" placeholder="What are you looking for?" style="height:100% ;" >
+           <button type="submit" class="searchButton">
+             <i class="fa fa-search"></i>
+          </button>
+        </div>
+     </div>
+ </form>
+     
+     
+
+
+
+
+
+
+
+
+     <div class="container-fluid" >
+
+        <div class="row">
+      	<aside class="col">
+		<form action="{% url 'filter' %}" class="search" method="GET">
+		<div class="card" style="">
+			<div class="card " style="background: #ECF8F6;box-shadow: 4px 4px 4px 0px #00000040;
+			">
+				<div class="card-header" style="border: 0;background:#ECF8F6;padding-left:15px">
+					<h3> price</h3>
+					<div class="range-slider">
+                        
+						<input  value="5" min="0" max="50" step="1" type="range"/>
+						<input value="10" min="0" max="50" step="1" type="range"/>
+							<div style="
+							position: absolute;
+							bottom: 0;
+						">
+							<input name="minprice" type="number" value="5" min="0" max="50"/>
+							<input  name="maxprice "  type="number" value="10" min="0" max="50"/>
+						</div>
+					</div>
 				</div>
-				<a href="" class="btn btn-block btn-primary">View Details</a>	
-			</figcaption>
-		</figure>
-	</div> <!-- col.// -->
-	{% endfor %}
+				<div class="card-body">
+				  <div>
+                    <h3>
+						Delivery options
+					</h3>
+					<div class="div">
+					<div class="form-check form-check-flex">
+						<input name="Delivery"  style="border-radius: 50%;" class="form-check-input" type="checkbox" id="flexCheckbox1" value="option1">
+						<label class="form-check-label" for="flexCheckbox1"> Delivery</label>
+					  </div>
+					  <div class="form-check form-check-flex">
+						<input name="Pickup" class="form-check-input" type="checkbox" id="flexCheckbox2" value="option2">
+						<label  class="form-check-label" for="flexCheckbox2">Pick up</label>
+					  </div>
+				
+					</div>
+					  
+
+				  </div>
+
+
+				  <div style="margin-top: 9%;">
+                    <h3>
+						Location
+					</h3>
+					<div class="div">
+					<div class="form-check form-check-flex">
+						<input name="ArroundMe" style="border-radius: 50%;" class="form-check-input" type="checkbox" id="flexCheckbox1" value="option1">
+						<label class="form-check-label" for="flexCheckbox1">Arround Me</label>
+					  </div>
+					  <div class="form-check form-check-flex">
+						<input name="Anywhere" class="form-check-input" type="checkbox" id="flexCheckbox2" value="option2">
+						<label class="form-check-label" for="flexCheckbox2">Anywhere</label>
+					  </div>
+				
+					</div>
+					  
+
+				  </div>
+				  <div style="text-align: center;">
+<button class="" type="submit" style="
+    background: #15534f;
+    border: 0;
+    padding-left: 7%;
+    color: #ecf8f6;
+    font-size: 25px;
+    border-radius: 5px;
+    padding-right: 7%;
+">  test </button>
+				</div>
+					</div>		     
+
+			  </div>
+		  </div>
+
+</form>
+	</aside> <!-- col.// -->
+            <main class="col-md-9">
+        
+        <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto">{{count}} Items found </span>
+                    
+                </div>
+        </header><!-- sect-heading -->
+        
+        <div class="row">
+        
+{% for book in books %}
+    
+    <div class="col-md-3">
+        <div class=".g-col-6 marga" style="height:50% ;">
+            <main id="main" style="
+   
+        ">
+                <section class="inner-page" style="
+  
+        ">
+                    <div class="container" style="
+        
+        ">
+                        <!-- ======= Shop Section ======= -->
+                        <section id="portfolio" class="portfolio" style="
+    
+        ">
+                            <div class="container" style="
+   
+        ">
+                                <div class="row portfolio-container" style="
+    
+        ">
+                                    <div class="col ">
+                                        <div class="portfolio-wrap" style="
+      
+        ">
+                                            <img src=" {{ book.picture.url }}" class="img-fluid" alt="" style="
+     
+        ">
+        
+                                            <div class="description">
+                                                <div  style="line-height: 3;" class="left">
+                                                    <h4>{{ book.book_name }}</h4>
+                                                    <p style="font-size:25.1px">{{ book.price }} DT</p>
+                                                </div>
+        
+                                                <div class="right">
+                                                    <a href="#">
+                                                        <img style="filter:invert(99%) sepia(99%) saturate(2%) hue-rotate(8deg) brightness(107%) contrast(100%); ;" src="{% static './img/icon//wish-list-icon.png' %}">
+                                                    </a>
+                                                </div>
+                                            </div>
+        
+                                            <div class="portfolio-links">
+                                                <a href="{{ book.get_url }}" style="height: 35px;margin-bottom: 5%;">Book detail</a>
+                                                <a href="{{ book.get_url }}" style="height: 35px;">add fav</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+        
+                        <!-- End Section -->
+                    </div>
+                </section>
+            </main></div>
+
+
+
+    </div>
+
+  
+
+
+
+
+
+{% endfor %}
+
+
+
+
+        
+        
+        </div>
+
+<div>
+	{% if  books.has_other_pages %}
+  <ul class="pagination">
+  	{%  if  books.has_previous %}
+ 
+    <li      class="page-item "><a class="page-"href="?page={{books.previous_page_number}}"><</a></li>
+    {% else %}
+    <li  class="page-item"><a class="page-" href="#"><</a></li>
+    {%  endif %}
+    {%  for i in books.paginator.page_range %}
+    {% if books.number == i %}
+    <li      class="page-item"><a class="page-"  style="
+    margin: 50px;
+    text-decoration: none;
+" href="#"> Page {{i}}</a></li>
+   
+    {%  endif %}
+    {% endfor %}
+
+    {% if books.has_next %}
+    <li      class="page-item "><a class=""href="?page={{books.next_page_number}}">></a></li>
+
+    {% else %}
+ <li class="page-item"><a class="page-lnk" href="#">></a></li>
+   {%  endif %}
+
+  </ul>
+  {% endif %}
+</div>
+        
+        </div> <!-- container .//  -->
+    </div>
+
+
+     
+</body>
+<script>
+	(function() {
+
+var parent = document.querySelector(".range-slider");
+if(!parent) return;
+
+var
+  rangeS = parent.querySelectorAll("input[type=range]"),
+  numberS = parent.querySelectorAll("input[type=number]");
+
+rangeS.forEach(function(el) {
+  el.oninput = function() {
+	var slide1 = parseFloat(rangeS[0].value),
+		  slide2 = parseFloat(rangeS[1].value);
+
+	if (slide1 > slide2) {
+			  [slide1, slide2] = [slide2, slide1];
+	  // var tmp = slide2;
+	  // slide2 = slide1;
+	  // slide1 = tmp;
+	}
+
+	numberS[0].value = slide1;
+	numberS[1].value = slide2;
+  }
+});
+
+numberS.forEach(function(el) {
+  el.oninput = function() {
+		  var number1 = parseFloat(numberS[0].value),
+				  number2 = parseFloat(numberS[1].value);
+		  
+	if (number1 > number2) {
+	  var tmp = number1;
+	  numberS[0].value = number2;
+	  numberS[1].value = tmp;
+	}
+
+	rangeS[0].value = number1;
+	rangeS[1].value = number2;
+
+  }
+});
+
+})();
+</script>
+</html>

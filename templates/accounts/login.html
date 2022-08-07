@@ -27,11 +27,11 @@
 
   </head>
 
-  <body>
+  <body style="background: rgba(236, 248, 246, 1);">
     {% include 'includes/navbar.html' %}
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
+    <section id="hero" class="d-flex align-items-center" style="background:rgba(236, 248, 246, 1);">
       <div class="container">
         <div class="title">
           <h1>Bienvenue ! </h1>
@@ -40,11 +40,16 @@
           <div
             class="login col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
           >
-            <form>
+
+            <form action="{% url 'login' %}"  method="POST">
+                      {% csrf_token %}
+
+                {% include 'includes/alerts.html' %}
               <h2>Se Connecter</h2>
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input
+                  name="email"
                   type="email"
                   id="form2Example1"
                   class="form-control"
@@ -55,6 +60,7 @@
               <!-- Password input -->
               <div class="form-outline mb-4">
                 <input
+                  name="password"
                   type="password"
                   id="form2Example2"
                   class="form-control"
@@ -66,12 +72,12 @@
               <div class="row mb-4">
                 <div class="Forget col">
                   <!-- Simple link -->
-                  <a href="#!">Mot de passe oublié?</a>
+                  <a href="{% url 'forgotPassword' %}">Mot de passe oublié?</a>
                 </div>
                 <div class="signin col d-flex justify-content-center">
                   <!-- Submit button -->
                   <button
-                    type="button"
+                    type="submit"
                     class="btn-in btn-primary btn-block mb-4"
                   >
                     Connecter
@@ -113,7 +119,7 @@
       </div>
     </section>
     <!-- End Hero -->
-    <footer id="colophon" class="site-footer" role="contentinfo">
+    <footer id="colophon" class="site-footer" role="contentinfo" style="background:rgba(236, 248, 246, 1);">
       <hr />
       <div class="social-wrapper">
         <ul>

@@ -96,6 +96,11 @@ body {
 ._show{
 	display: none;
 }
+
+#btnhome{
+
+	width: 30%;
+}
 @media screen and (max-width: 600px) {
 	.hi-slide{
 		display: none;
@@ -103,6 +108,11 @@ body {
 	._show{
 		display: inline-flex;
 	}
+	#btnhome{
+
+	width: 60%;
+}
+
   }
 
 

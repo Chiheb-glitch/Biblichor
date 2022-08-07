@@ -20,6 +20,9 @@
 				background: #ecf8f6;
 
 	}
+     .alert-error{
+      background: #D6715B;color: #18534f;
+   }
 </style>
 <body>
     {% include 'includes/navbar.html' %}
@@ -40,60 +43,52 @@
      </div>
 
 
+<form  style="width: 100% !important;margin: 0 !important;" action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+
+
+
+
+            {% if form.errors %}
+            
+            <div id="message" class="container" >  
+
+     <div  class="alert alert-error" role="alert">
+        <button type="button"  class="close" data-dismiss="alert" ><span aria-hidden="true"  ></span>&times;</button>
+         {{ test }}
+    </div>
+    </div>
+            
+            
+            {% endif %}
+
 
      <div class="grid" style="display:flex;text-align:center;">
         <div class="col">
             <div class="form-outline mb-4">
-                <input
-                    type="email"
-                    id="form2Example1"
-                    class="form-control"
-                    placeholder="Prénom"
-                />
+              {{ form.first_name }}
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Nom d'utilisateur"
-                />
+                 {{ form.username }}
             </div>
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Mot de passe"
-                />
+                                    {{form.password}}
+
             </div>
         </div>
         <div class="col">
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Nom de famille"
-                />
+            {{ form.last_name }}
+
             </div>
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Adresse e-mail"
-                />
+                        {{ form.email }}
+
             </div>
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="vérifier le mot de passe"
-                />
+                {{ form.confirm_password }}
             </div>
         </div>
      </div>
@@ -102,7 +97,8 @@
      color:#15534F;
      background: #ECF8F6;
     ">
-   	<a href="{% url 'register1' %}"
+   	<button type="submit" 
+   
        class="btn btn-light btn-lg"
        style="
        margin: 20px;
@@ -114,8 +110,9 @@
    "
      >
      Suivant
-     </a>
-      
+     </button>
+        </form>
+
   </div>
 
      <footer id="colophon" class="site-footer" role="contentinfo">

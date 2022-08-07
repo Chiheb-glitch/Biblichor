@@ -13,10 +13,6 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	color: #f8a41e;
-	text-decoration: none;
-}
 
 h1,
 h2,
@@ -64,7 +60,6 @@ h6,
 @media (max-width: 575px) {
 	#hero .hero-img img {
 		width: 80%;
-		margin-right: -100px;
 	}
 }
 @media (max-height: 600px) {
@@ -170,42 +165,9 @@ footer hr {
 	opacity: 0.8;
 }
 
-	.imghelp{
-		height: 250px;
-	}
-#show1{
-	top: 35%;
-	left: 10%;
-}
-#showp{
-	margin-right: 20%;
-	margin-left: 20%;
-	font-family: 'Garamond';
-	font-weight: 400;
-	font-size: 24px;
-	color: #226D68;
-}
-@media screen and (max-width: 600px) {
-	#show{
-		top: 10%;
-	}
-	#showp{
-		margin: 0;
-		margin-right: 10%;
-		font-size: 20px;
-		background-color: #84a6a416;
-	}
-	#show1{
-	top: 10%;
-	lef
-	}
 
-
-	.imghelp{
-		height: 60%;
+@media (max-width: 600px) {
+	form {
+		margin-left: 20% !important;
 	}
-	@media screen and (max-width: 600px) {
-		.imghelp{
-			height: 20%;
-		}
-		}
+}

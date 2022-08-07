@@ -40,52 +40,29 @@
      </div>
 
 
+<form  style="width: 100% !important;margin: 0 !important;" action="{% url 'register1' %}" method="POST">
+                {% csrf_token %}
 
      <div class="grid" style="display:flex;text-align:center;">
         <div class="col">
             <div class="form-outline mb-4">
-                <input
-                    type="email"
-                    id="form2Example1"
-                    class="form-control"
-                    placeholder="Adresse 1"
-                />
+                {{form.address_line_1}}
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Ville "
-                />
+              {{ form.vilee }}
             </div>
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Code postal"
-                />
+              {{ form.codepostal }}
             </div>
         </div>
         <div class="col">
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="Adress 2"
-                />
+              {{form.address_line_2}}
             </div>
             <div class="form-outline mb-4">
-                <input
-                    type="password"
-                    id="form2Example2"
-                    class="form-control"
-                    placeholder="État"
-                />
+               {{ form.etat }}
             </div>
            
         </div>
@@ -108,7 +85,7 @@
      >
      précédant
      </a>
-     <a href="{% url 'register2' %}" 
+     <button
      class="btn btn-light btn-lg"
      style="
      margin: 20px;
@@ -120,8 +97,9 @@
  "
    >
    Suivant
-   </a>
+   </button>
   </div>
+</form>
 
      <footer id="colophon" class="site-footer" role="contentinfo">
         <hr />

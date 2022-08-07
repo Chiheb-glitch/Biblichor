@@ -44,12 +44,10 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account (AbstractBaseUser):
-
 	first_name=models.CharField(max_length=50)
 	last_name=models.CharField(max_length=50)
-	username=models.CharField(max_length=50,unique=True)
+	username=models.CharField(max_length=50,unique=True, error_messages={'invalid':"you custom error message"})
 	email=models.EmailField(max_length=100,unique=True)
-	phone_number = models.CharField(max_length=50)
 
 
 
@@ -70,7 +68,6 @@ class Account (AbstractBaseUser):
 		return self.email 
 
 	def has_perm(self , perm, obj=None):
-		return  True
 
 		return self.is_admin
 	def has_module_perms(self , add_label):
@@ -81,11 +78,23 @@ class Account (AbstractBaseUser):
 class UserProfile(models.Model):
 	user  = models.OneToOneField(Account,on_delete=models.CASCADE)
 
-	address_line_1=models.CharField(blank=True,max_length=100)
-	address_line_2=models.CharField(blank=True,max_length=100)
-	profile_picture=models.ImageField(blank=True,upload_to='userprofile',default='userprofile/169660610_913026526206945_1802319886465244479_n.jpg')
-	city=models.CharField(blank=True, max_length=20)
-	state=models.CharField(blank=True, max_length=20)
+	address_line_1=models.CharField(max_length=100,blank=False)
+	address_line_2=models.CharField(max_length=100)
+	profile_picture=models.ImageField(blank=True,upload_to='userprofile',default='userprofile/mainone.jfif')
+	vilee=models.CharField(blank=False, max_length=20)
+	etat=models.CharField(blank=False, max_length=20)
+	codepostal=models.CharField(blank=False, max_length=20)
+	phone_number = models.CharField(max_length=50,blank=True)
+	description=models.CharField(blank=True,max_length=1500)
+	instagram=models.CharField(blank=True,max_length=100)
+	facebook=models.CharField(blank=True,max_length=100)
+	whattpad=models.CharField(blank=True,max_length=100)
+	goodreads=models.CharField(blank=True,max_length=100)
+	REQUIRED_FIELDS=['address_line_1','vilee','etat']
+
+    
+
+
 
 	def __str__(self):
 		return self.user.first_name

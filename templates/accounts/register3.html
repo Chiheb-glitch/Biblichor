@@ -55,16 +55,17 @@
          
                 
                   
-                        <form>
-                         
-                            
+                    <form  style="width: 100% !important;margin: 0 !important;" action="{% url 'register2' %}" method="POST">
+
+                                            {% csrf_token %}
+
                             <!-- pic input -->
                             <div class="profile-pic">
                                 <label class="-label" for="file">
                                     <span class="glyphicon glyphicon-camera"></span>
                                     <span>Changer Image</span>
                                 </label>
-                                <input id="file" type="file" onchange="loadFile(event)" />
+                                {{ form.profile_picture }}
                                 <img
                                     src="{% static './img/Illustration/User Profile Picture.svg' %}"
                                     id="output"
@@ -75,57 +76,27 @@
                             <h5 style="text-align:center;margin: 3%;color: #185365;font-size: 17px;"> Change profile picture</h5>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example1"
-                                    class="form-control"
-                                    placeholder="Numéro de téléphone"
-                                />
+                               {{ form.phone_number}}
                             </div>
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example2"
-                                    class="form-control"
-                                    placeholder="La description" style="height: 150px"
-                                />
+                               {{ form.description }}
                             </div>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example1"
-                                    class="form-control"
-                                    placeholder="Lien Instagram"
-                                />
+                               {{ form.instagram }}
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example1"
-                                    class="form-control"
-                                    placeholder=" Lien Facebook "
-                                />
+                               {{ form.facebook }}
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example1"
-                                    class="form-control"
-                                    placeholder=" Lien Whattpad "
-                                />
+                               {{ form.whattpad }}
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input
-                                    type="text"
-                                    id="form2Example1"
-                                    class="form-control"
-                                    placeholder="Lien Whattpad "
-                                />
+                               {{ form.goodreads }}
                             </div>
                             <!-- 2 column grid layout for inline styling -->
                             <div class="row mb-4">
@@ -141,7 +112,7 @@
                                 ">
                                   précédant
                                   </a>
-                                    <a  href="{% url 'under' %}" class="btn btn-light btn-lg" style="
+                                    <button type="submit" class="btn btn-light btn-lg" style="
      margin: 20px;
      background: #ab7749;
     padding-right: 8%;
@@ -150,7 +121,7 @@
      border: 0;
  ">
    Suivant
-   </a>
+   </button>
                                 </div>
                             </div>
                         </form>

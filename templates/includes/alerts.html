@@ -1,0 +1,22 @@
+<style type="text/css">
+   
+   .alert-error{
+      background: #d6715b85;color: #18534f;
+      font-size: 15px;
+   }
+</style>
+{% if messages %}
+
+    {% for message in messages %}
+    <div id="message" class="container-fluid" >  
+
+     <div  {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+        <button type="button"  class="close" data-dismiss="alert" ><span aria-hidden="true"  ></span>&times;</button>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}ERROR: {% endif %}
+        {{ message }}
+    </div>
+    </div>
+
+    {% endfor %}
+
+{% endif %}
