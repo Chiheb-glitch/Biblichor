@@ -41,7 +41,7 @@
 				left: 620,
 				$opacity: 0.4
 			},
-			{ $zIndex: 1, width: 120, height: 150, top: 69, left: 500, $opacity: 0.2 }
+			{ $zIndex: 1, width: 20, height: 150, top: 69, left: 500, $opacity: 0.2 }
 		];
 
 		var $lis = $ele.find("li");
