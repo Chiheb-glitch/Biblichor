@@ -1,24 +1,37 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Book ,bookgallery
 from .forms import AddBookForm
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q 
 from accounts.models import UserProfile
+from category.models import Category
 
 # Create your views here.
-def store (request):
-	books= Book.objects.all().filter(is_available=True)
-	paginator=Paginator(books,4)
-	page=request.GET.get('page')
-	paged_books=paginator.get_page(page)
-	book_count=books.count()
+def store (request,category_slug=None):
+	category=Category.objects.all()
+	if category_slug != None:
+		c=get_object_or_404(Category,slug=category_slug)
+		books= Book.objects.all().filter(is_available=True,category=c)
+		paginator=Paginator(books,12)
+		page=request.GET.get('page')
+		paged_books=paginator.get_page(page)
+		book_count=books.count()
+		
+	else:
+		books= Book.objects.all().filter(is_available=True)
+		paginator=Paginator(books,12)
+		page=request.GET.get('page')
+		paged_books=paginator.get_page(page)
+		book_count=books.count()
 
 
 
 
 	context = {
 	'books':paged_books,
-	'count':book_count
+	'count':book_count,
+	'categorys':category,
+	'category_slug':category_slug
 	}
 	return  render (request , 'store/store.html', context)
 
@@ -33,17 +46,19 @@ def search(request):
 			paginator=Paginator(books,8)
 			page=request.GET.get('page')
 			paged_books=paginator.get_page(page)
-
+	category=Category.objects.all()
 	context={
 	'books':paged_books,
-	'count':book_count
+	'count':book_count,
+	'category_slug':None,
+	'categorys':category
 	}
 
 	return render(request ,'store/store.html',context)
 
 
 def filter (request):
-
+	category=Category.objects.all()
 	print(request.GET)
 	books=Book.objects.all().filter(is_available=True,pickup= 'Pickup'  in request.GET ,delivery='Delivery'  in request.GET )
 	book_count=books.count()
@@ -55,7 +70,8 @@ def filter (request):
 
 	context={
 	'books':paged_books,
-	'count':book_count
+	'count':book_count,
+	'categorys':category
 	}
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account , UserProfile
+from .models import Account , UserProfile ,ReviewRationg
 from django.utils.html import format_html
 from django.contrib.auth.admin  import UserAdmin
 
@@ -27,3 +27,4 @@ class AccountAdmin(UserAdmin):
 #admin.site.register(UserProfile,UserProfileAdmin)
 admin.site.register(Account,AccountAdmin)
 admin.site.register(UserProfile)
+admin.site.register(ReviewRationg)

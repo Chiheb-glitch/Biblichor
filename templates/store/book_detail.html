@@ -7,8 +7,9 @@
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="{% static './img/logo/Biblichor.png' %}" rel="shortcut icon" type="image/x-icon">
 
-<title>GreatKart | One of the Biggest Online Shopping Platform</title>
+<title>{{ single_book.book_name }}</title>
 
 
 <!-- jQuery -->
@@ -110,7 +111,7 @@ $(document).ready(function() {
 
 <div class="col" style="flex-basis: 10;width: 70%;flex: initial;margin-left: 5%;">
 	<div class="col" style="padding-bottom:15% ;">
-		<h2 class="title" style="font-size:32px ;line-height: 36px;color: #18534f;font-family: 'Garamond';font-weight: 700;">{{ profile.user.username }}</h2>
+		<h2 class="title" style="font-size:32px ;line-height: 36px;color: #18534f;font-family: 'Garamond';font-weight: 700;">  <a href="{%  url 'dashboard' username=profile.user.username %}" style="color:#18534f">     {{ profile.user.username }}</a> </h2>
 <div class="mb-3"> 
 <div class="div">
                     <img style="height:40px ;" src="{% static './img/icon/star-symbol.svg' %}">
@@ -185,10 +186,17 @@ $(document).ready(function() {
 	<hr>
 	<div class="tessqt" style="text-align:center ;">
 		{% if single_book.user != user %}
-		<a href="./product-detail.html" class="btn  btn-primary"style="
+		{% if single_book.code_a_barre in list_code  %}
+		<a href="{% url 'add_cart' code_a_barre=single_book.code_a_barre %}" class="btn  btn-primary"style="
 		padding-left: 20%;
 		padding-right: 20%;
-	">  <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+	">  <span class="text"> Mawjoud fel cart </span> <i class="fas fa-shopping-cart"></i>  </a>
+	{% else %}
+	<a href="{% url 'add_cart' code_a_barre=single_book.code_a_barre %}" class="btn  btn-primary"style="
+		padding-left: 20%;
+		padding-right: 20%;
+	">  <span class="text"> ADD TO CART </span> <i class="fas fa-shopping-cart"></i>  </a>
+    {% endif %}
 	{% else %}
 	<p>   raw ktebek ya m3alem </p>
 	{%  endif %}
@@ -237,6 +245,10 @@ $(document).ready(function() {
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
-
+ <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>

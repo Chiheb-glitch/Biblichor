@@ -33,6 +33,19 @@ font-weight: 400;
     display: block;
   }
 
+.table>:not(caption)>*>*{
+  border-bottom: 2px solid #D6955B;
+}
+@media (min-width:579px){
+
+
+.modal-dialog
+{
+max-width: 60%;
+
+}
+}
+
   .dropdown-content a:hover {background-color: #f1f1f1}
 
   .dropdown:hover .dropdown-content {
@@ -142,7 +155,11 @@ margin-right: 0;
 					  <a  class="nav-link  iconnavbar padnavbar" href="{% url 'under' %}"> <img style="height: 35px;" src="{% static './img/icon/wish-list-icon.png' %}"> </a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link  iconnavbar padnavbar" href="{% url 'under' %}" ><img style="height: 35px;" src="{% static './img/icon/shopping-cart.png' %}"></a>
+				  	{% if user.id is None %}
+				  	<a class="nav-link  iconnavbar padnavbar" href="{%  url 'login' %}" ><img style="height: 35px;" src="{% static './img/icon/shopping-cart.png' %}"></a>
+				  {% else %}
+					<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="nav-link  iconnavbar padnavbar" href="" ><img style="height: 35px;" src="{% static './img/icon/shopping-cart.png' %}"></a>
+						{% endif %}
 				</li>
 				
 					{% if user.id is  None %} 
@@ -178,7 +195,7 @@ margin-right: 0;
             <div class="dropdown-content">
                 <a ><img src="{% static './icon/Purchase.png' %}" style="width:20px; margin: 5px;" alt="">Purchase & Reviews</a>
                 <a href="#"><img src="{% static './icon/settings.png' %}" style="width:20px; margin: 5px;" alt="">Account Settings</a>
-                <a href="{% url 'dashboard' %}"><img src="{% static './icon/dashboard.png' %}" style="width:20px; margin: 5px;" alt="">Dashboard</a>
+                <a href="{% url 'dashboard' username=user.username %}"><img src="{% static './icon/dashboard.png' %}" style="width:20px; margin: 5px;" alt="">Dashboard</a>
                 <a href="{% url 'logout' %}"><img src="{% static './icon/sign-out.png' %}" style="width:20px; margin: 5px;" alt="">Sign Out</a>
             </div>
         </div>
@@ -192,6 +209,225 @@ margin-right: 0;
 		  </div>
 	  
 	  </nav>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+ 
+    <div class="modal-content" style="background: #ECF8F6;
+    ">
+      <div class="modal-header" style="border:0 ;">
+        <h5 class="modal-title" id="staticBackdropLabel" style="height: 54px;
+        width: 89px;
+        left: 118px;
+        top: 322px;
+        border-radius: nullpx;font-family: Garamond;
+font-size: 48px;
+font-weight: 700;
+line-height: 54px;
+letter-spacing: 0em;
+text-align: left;
+color:#18534F;
+
+        ">Cart</h5>
+    
+      </div>
+      <div class="modal-body" >
+  
+          
+
+
+          <table class="table">
+            <tr style="border-bottom: 3px solid #D6955B;border-top: 2px solid #ECF8F6;">
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"><p style="height: 33px;
+                width: 153px;
+                left: 835px;
+                top: 370px;
+                border-radius: nullpx;font-family: Poppins;
+font-size: 24px;
+font-weight: 300;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: left;
+color: #D6955B;
+
+                "> period</p> </th>
+              <th scope="col"><p style="height: 33px;
+                width: 153px;
+                left: 835px;
+                top: 370px;
+                border-radius: nullpx;font-family: Poppins;
+font-size: 24px;
+font-weight: 300;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: left;
+color: #D6955B;
+
+                "> Price </p></th>
+            </tr>
+            </thead>
+            <tbody>
+            	{% if  cart_items != False %}
+            	{%  for cart_item in cart_items  %}
+              <tr>
+               
+                <td style="width:15% ;"><img style="width: 100%; height:50%;" src="{{ cart_item.book.picture.url }}"></td>
+                <td><p style="
+                  width: 244px;
+                  left: 356px;
+                  top: 435px;
+                  border-radius: nullpx;
+                  font-family: Garamond;
+font-size: 32px;
+font-weight: 700;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: left;color: #18534F;
+
+
+                  ">
+                  {{ cart_item.book.book_name }}
+                </p>
+              <p style="height: 31px;
+              width: 244px;
+              left: 356px;
+              top: 470px;
+              border-radius: nullpx;
+              height: 31px;
+width: 244px;
+left: 356px;
+top: 470px;
+border-radius: nullpx;
+color:#18534F;margin-top: 15%;
+              ">
+{{ cart_item.book.book_writer }}              </p>
+            <p style="height: 24px;
+            width: 95px;
+            left: 356px;
+            top: 518px;
+            border-radius: nullpx;
+            font-family: Montserrat;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+color:#D6955B;
+">
+
+              ID {{ cart_item.book.code_a_barre }}
+            </p>
+            </td>
+                <td>
+
+                  <p style="height: 31px;
+                  width: 244px;
+                  left: 807px;
+                  top: 435px;
+                  border-radius: nullpx;
+                  font-family: Roboto;
+font-size: 24px;
+font-weight: 400;
+line-height: 28px;
+letter-spacing: 0em;
+text-align: left;
+color: #18534F;
+
+
+                  ">
+                     <span style="color: #D6955B;"> From </span>  20/20/2020                  </p>
+                     <p style="height: 31px;
+                     width: 244px;
+                     left: 807px;
+                     top: 435px;
+                     border-radius: nullpx;
+                     font-family: Roboto;
+   font-size: 24px;
+   font-weight: 400;
+   line-height: 28px;
+   letter-spacing: 0em;
+   text-align: left;
+   color: #18534F;">
+    
+                  <span style="color: #D6955B;"> To </span>     20/20/2020                </p>
+
+                </td>
+
+                <td>
+
+                  <p style="font-family: Garamond;
+                  font-size: 36px;
+                  font-weight: 700;
+                  line-height: 41px;
+                  letter-spacing: 0em;
+                  text-align: left;height: 50px;
+width: 133px;
+left: 1181px;
+top: 435px;
+border-radius: nullpx;
+color:#D6955B;
+                  ">
+                    {{ cart_item.book.price }}             DT   </p>
+              
+
+                </td>
+              </tr>
+
+{% endfor %}
+{%  endif %}
+
+
+
+
+            </tbody>
+          </table>
+          
+          
+          <div class="modal-footer" style="border-top: 0;">
+        <button type="button" class="btn" style="height: 52px;
+        width: 280px;
+        left: 739px;
+        top: 971px;
+        border-radius: 5px;
+        background:#D6955B;
+        color:aliceblue;font-family: Montserrat;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: center;
+
+        " data-bs-dismiss="modal">continue Shopping</button>
+        <button type="button" class="btn"  style="height: 52px;
+        width: 280px;
+        left: 1051px;
+        top: 971px;
+        border-radius: 5px;
+        background:#18534F;
+        font-family: Montserrat;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: center;
+color:aliceblue;
+        
+        ">Understood</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
 	   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 

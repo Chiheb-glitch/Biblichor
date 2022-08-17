@@ -55,7 +55,10 @@ class Account (AbstractBaseUser):
 	last_login=models.DateTimeField(auto_now_add=True)
 	is_admin = models.BooleanField(default=False)
 	is_staff = models.BooleanField(default=False)
-	is_active = models.BooleanField(default=False)
+	is_active = models.BooleanField(default=True)
+	is_verif=models.BooleanField(default=False)
+	is_step1=models.BooleanField(default=False)
+	is_step2=models.BooleanField(default=False)
 	is_superadmin = models.BooleanField(default=False)
 
 	USERNAME_FIELD='email'
@@ -103,3 +106,16 @@ class UserProfile(models.Model):
 	def full_address(self):
 
 		return f'{self.address_line_1} {self.address_line_2}'
+
+
+
+class ReviewRationg(models.Model):
+	user=models.ForeignKey(Account,on_delete=models.CASCADE)
+	review=models.TextField(max_length=500,blank=True)
+	rating=models.FloatField()
+	ip=models.CharField(max_length=20,blank=True)
+	created_at=models.DateTimeField(auto_now_add=True)
+	updated_at=models.DateTimeField(auto_now=True)
+	username_add_to=models.CharField(max_length=50,blank=False,default="none")
+	def __str__(self):
+		return self.user.username

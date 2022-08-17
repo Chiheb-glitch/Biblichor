@@ -176,6 +176,7 @@ a{
     margin-bottom: -6px;
    }
 .description .left {
+	height: 150px;
 	margin-top: -130px;
 	margin-bottom: -10px;
 	margin-left: 10px;
@@ -342,6 +343,22 @@ input[type=range]::-ms-thumb {
 	padding: 0;
 }
 
+.cat {
+	text-align: center;
+	width: 10%;
+	background: #18534F;
+}
+.catactive {
+	text-align: center;
+	width: 10%;
+	background: #D6955B;
+}
+
+.tesp{
+	font-size: 25px;
+	margin-top: 5%;
+	color: white;
+}
 
 </style>
 <body>
@@ -367,7 +384,57 @@ input[type=range]::-ms-thumb {
 
 
      <div class="container-fluid" >
+<div class="row" style="margin-bottom: 5%;">
+	{% if category_slug == None %}
+	<div class="catactive" >
+  	<a href="{% url 'store' %}">
+  		  	<p class="tesp"> ALL </p>
 
+
+  		
+  	</a>
+  </div>
+  {% else %}
+
+	<div class="cat" >
+  	<a href="{% url 'store' %}">
+  		  	<p class="tesp"> ALL </p>
+
+
+  		
+  	</a>
+  </div>
+
+  {% endif %}
+	{% for category in categorys %}
+
+		{% if category_slug == category.slug %}
+
+  <div class="catactive" >
+  	<a href="{{ category.get_url }}">
+  		  	<p class="tesp"> {{ category.Category_name }} </p>
+
+
+  		
+  	</a>
+  </div>
+
+
+  {% else %}
+    <div class="cat" >
+  	<a href="{{ category.get_url }}">
+  		  	<p class="tesp"> {{ category.Category_name }} </p>
+
+
+  		
+  	</a>
+  </div>
+  {% endif %}
+{%  endfor %}
+
+
+
+</div>
         <div class="row">
       	<aside class="col">
 		<form action="{% url 'filter' %}" class="search" method="GET">
@@ -618,4 +685,9 @@ numberS.forEach(function(el) {
 
 })();
 </script>
+ <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
 </html>

@@ -1,13 +1,15 @@
 from django.shortcuts import render ,redirect,get_object_or_404
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm ,UserProfileForm , UserProfileForm1
-from .models import Account , UserProfile
-from django.http import HttpResponse  
+from .forms import RegistrationForm ,UserProfileForm , UserProfileForm1 
+from .models import Account , UserProfile ,ReviewRationg
+from django.http import HttpResponse  ,HttpResponseRedirect
 from book.models import Book
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.html import strip_tags
 import json
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from cryptography.fernet import Fernet
 
 from django.template.loader import render_to_string
@@ -18,8 +20,22 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage ,EmailMultiAlternatives
 from Biblichor.settings import EMAIL_HOST_USER
+
+
+
+
+
+
+	
+    
+
+
+
+
 def register (request):
 	x=""
+	if request.user.is_authenticated:
+		return redirect('register1')
 	if request.method == 'POST':
 		form =RegistrationForm(request.POST)
 		if form.is_valid():
@@ -38,31 +54,36 @@ def register (request):
 			profile.save()			
 			mail_subject="Please activate your account"
 			current_site=get_current_site(request)
-			message = render_to_string('accounts/account_verification_email.html',{
-				'user':user,
-				'domain':current_site,
-				'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-				'token':default_token_generator.make_token(user)
-				})
-			text=strip_tags(message)
-			to_email=email
-			send_email=EmailMultiAlternatives(f'{mail_subject}',f'{mail_subject}',EMAIL_HOST_USER,[f'{email}'])
-			send_email.attach_alternative(message,'text/html')
-			send_email.send()
-			user.save()
-			profile=UserProfile()
+			
+			#user.save()
+			#profile=UserProfile()
+			user=auth.authenticate(email=email,password=password)
+			if user is not None:
+				#message = render_to_string('accounts/account_verification_email.html',{
+				#'user':user,
+				#'domain':current_site,
+				#'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+				#'token':default_token_generator.make_token(user)
+				#})
+				#text=strip_tags(message)
+				#to_email=email
+				#send_email=EmailMultiAlternatives(f'{mail_subject}',f'{mail_subject}',EMAIL_HOST_USER,[f'{email}'])
+				#send_email.attach_alternative(message,'text/html')
+				#send_email.send()
+				auth.login(request,user)
+				return redirect('register1')
 
 		
 			
-			response=  render (request, 'accounts/register2.html')
-			key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
-			fernet = Fernet(key)
-			message=str(user.id)
-			encMessage = fernet.encrypt(bytes(message,'utf-8'))
+		#	response=  render (request, 'accounts/register2.html')
+		#	key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
+		 #	fernet = Fernet(key)
+		#	message=str(user.id)
+		#	encMessage = fernet.encrypt(bytes(message,'utf-8'))
 
 
-			response.set_cookie('userid',encMessage)
-			return response
+#			response.set_cookie('userid',encMessage)
+#			return response
 		else:
 			x=form.errors.as_json()
 			x=x
@@ -82,44 +103,54 @@ def register (request):
 	return render(request ,'accounts/register1.html',context)
 
 def register1(request):
+	if request.user.is_step1 :
+		return redirect('register2')
 
-	user_id= request.COOKIES['userid']
-	key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
-	fernet = Fernet(key)
-	print(type(user_id))
-	print(user_id)
-	print(bytes(user_id,'utf-8'))
-	user_id=fernet.decrypt(bytes(user_id[2:-1],'utf-8'))
-	_u=Account.objects.get(id=user_id)
+
+
+	#user_id= request.COOKIES['userid']
+	 #key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
+	#fernet = Fernet(key)
+	#print(type(user_id))
+	#print(user_id)
+	#print(bytes(user_id,'utf-8'))
+	#user_id=fernet.decrypt(bytes(user_id[2:-1],'utf-8'))
+	_u=Account.objects.get(id=request.user.id)
 	if request.method == 'POST':
 		form=UserProfileForm1(request.POST)
 		if form.is_valid():
 			user=UserProfile.objects.get(user=_u)
 			user.address_line_1=form.cleaned_data['address_line_1']
 			user.address_line_2=form.cleaned_data['address_line_2']
-			user.vilee=request.form.cleaned_data['vilee']
-			user.etat=request.form.cleaned_data['etat']
+			user.vilee=form.cleaned_data['vilee']
+			user.etat=form.cleaned_data['etat']
 			user.codepostal=form.cleaned_data['codepostal']
 			user.save()
+			_u.is_step1=True
+			_u.save()
 			return redirect(register2)
 	else:
-		form=UserProfileForm1(request.POST)
+		form=UserProfileForm1()
 	context={'form':form}
 
 
 
 	return render (request ,'accounts/register2.html',context)
 def register2(request):
+	if request.user.is_step2 :
+		return redirect('dashboard' ,username=(request.user.username))
+
 	if request.method =="POST":
-		form=UserProfileForm(request.POST)
+		form=UserProfileForm(request.POST,request.FILES)
 		if form.is_valid():
 
-		 user_id= request.COOKIES['userid']
-		 key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
-		 fernet = Fernet(key)
-		 user_id=fernet.decrypt(bytes(user_id[2:-1],'utf-8'))
-		 _u=Account.objects.get(id=user_id)
+		# user_id= request.COOKIES['userid']
+		# key=bytes(b'juT0wdzMLwlKBHq2ZI1lRahYw-k6kJaP33W2mbaqScc=')
+		# fernet = Fernet(key)
+		# user_id=fernet.decrypt(bytes(user_id[2:-1],'utf-8'))
+		 _u=Account.objects.get(id=request.user.id)
 		 user=UserProfile.objects.get(user=_u)
+		 user.profile_picture=form.cleaned_data['profile_picture']
 		 user.phone_number=form.cleaned_data['phone_number']
 		 user.description=form.cleaned_data['description']
 		 user.instagram=form.cleaned_data['instagram']
@@ -127,11 +158,25 @@ def register2(request):
 		 user.whattpad=form.cleaned_data['whattpad']
 		 user.goodreads=form.cleaned_data['goodreads']
 		 user.save()
+		 _u.is_step2=True
+		 _u.save()
+		 mail_subject="Please activate your account"
+		 current_site=get_current_site(request)
+		 message = render_to_string('accounts/account_verification_email.html',{
+				'user':user,
+				'domain':current_site,
+				'uid':urlsafe_base64_encode(force_bytes(_u.pk)),
+				'token':default_token_generator.make_token(_u)
+				})
+		 text=strip_tags(message)
+		 to_email=_u.email
+		 send_email=EmailMultiAlternatives(f'{mail_subject}',f'{mail_subject}',EMAIL_HOST_USER,[f'{to_email}'])
+		 send_email.attach_alternative(message,'text/html')
+		 send_email.send()
 
+         
 
-
-
-		 return redirect(login)
+		 return redirect('dashboard',username=(request.user.username))
 	else:
 		form=UserProfileForm()
 
@@ -142,6 +187,8 @@ def register2(request):
 
 
 def login (request):
+	if request.user.is_authenticated:
+		return redirect('dashboard',username=(request.user.username))
 	print(request)
 	if request.method=='POST':
 		print("firsttttt")
@@ -154,6 +201,8 @@ def login (request):
 		if user is not None:
 			auth.login(request,user)
 			print('defffffffffff')
+			#if user.is_admin:
+			#	redirect('admin')
 			return render(request ,'under.html')
 		else:
 			messages.error(request,'E-mail ou Mot de passe incorrect')
@@ -178,12 +227,12 @@ def activate (request,uidb64,token):
 		user=Account._default_manager.get(pk=uid)
 	except(TypeError,valueError,OverflowError,Account.DoesNotExist):
 		user=None
-
+	print(default_token_generator.check_token(user,token))
 	if user is not None and default_token_generator.check_token(user,token):
-		user.is_active=True
+		user.is_verif=True
 		user.save()
 		messages.success(request,'Congratulation!! Your Account is activated')
-		return redirect('login')
+		return redirect('dashboard',username=(request.user.username))
 	else:
 		messages.error(request,'invalid activation link')
 		return redirect('register')
@@ -193,13 +242,37 @@ def activate (request,uidb64,token):
 	return HttpResponse("ok")
 
 @login_required(login_url ='login' )
-def dashboard(request):
-	userprofile=get_object_or_404(UserProfile,user=request.user)
-	Books=Book.objects.filter(user=request.user)
+def dashboard(request,username):
+	if request.user.is_step1 == False:
+		return redirect('register1')
+	if request.user.is_step2 == False :
+	    return redirect('register2')	
+	if  request.user.is_verif == False :
+		 return render(request,'accounts/verif_email.html')
+
+	user=Account.objects.get(username=username)
+	userprofile=get_object_or_404(UserProfile,user=user)
+	Books=Book.objects.filter(user=user)
+	paginator=Paginator(Books,5)
+	page=request.GET.get('page')
+	paged_books=paginator.get_page(page)
+	review=ReviewRationg.objects.filter(username_add_to=username)
+	print(review)
+	s=0
+	for i in review:
+		s+=i.rating
+		print(i.rating)
+	if   review.count() != 0:
+		s= int(s/review.count())
+	else:
+		s=0
 	context={
     'userprofile':userprofile,
     'bookcount':Books.count(),
-    'books':Books
+    'books':paged_books,
+    'username':username,
+    'review':review,
+    's':s
     }
     
 
@@ -208,6 +281,19 @@ def dashboard(request):
 	return render(request,'accounts/dashboard.html',context)
 
 
+def add_review(request,username):
+	review=ReviewRationg()
+	review.review=request.POST['reviw']
+	review.rating=request.POST['rating2']
+	review.ip=request.META.get('REMOTE_ADDR')
+	review.username_add_to=username
+	review.user=request.user
+	review.save()
+
+
+
+	
+	return redirect ('dashboard',username=(username))
 
 
 def forgotPassword(request):
@@ -217,7 +303,7 @@ def forgotPassword(request):
 			user=Account.objects.get(email__exact=email)
 			#email te3 passwoard
 			current_site=get_current_site(request)
-			mail_subject="Reset your password "
+			mail_subject="réinitialisez votre mot de passe "
 			message = render_to_string('accounts/reset_password_email.html',{
 				'user':user,
 				'domain':current_site,
@@ -227,7 +313,7 @@ def forgotPassword(request):
 			to_email=email
 			send_email=EmailMessage(mail_subject,message,to=[to_email])
 			send_email.send()
-			messages.success(request,'Password reset email has ben sent to your email address ..')
+			messages.success(request,'Un e-mail de réinitialisation du mot de passe a été envoyé à votre adresse e-mail ..')
 			return redirect('login')
 
 		else:

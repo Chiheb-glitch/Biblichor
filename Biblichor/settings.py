@@ -27,7 +27,7 @@ SECRET_KEY = 'unyuizi@0g(7dnpu53hvb0*v2p746th0jqku-%ag59d@_(70&c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.36.51.255']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'category',
     'accounts',
     'book',
+    'carts'
     
 ]
 
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'carts.context_processors.Cart_context',
             ],
         },
     },

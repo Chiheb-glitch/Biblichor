@@ -37,7 +37,7 @@ class RegistrationForm(forms.ModelForm):
 		if password  != confirm_password :
 
 			raise forms.ValidationError(
-				'test',code="20"
+				'Mot de passes non compatibles',code="20"
 				)
 class UserProfileForm(forms.ModelForm):
 	profile_picture = forms.ImageField(required=False, error_messages={'invalid':("Image files only")}, widget=forms.FileInput)
