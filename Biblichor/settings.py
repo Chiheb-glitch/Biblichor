@@ -26,7 +26,7 @@ SECRET_KEY = 'unyuizi@0g(7dnpu53hvb0*v2p746th0jqku-%ag59d@_(70&c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','13.40.96.175']
+ALLOWED_HOSTS = ['127.0.0.1','18.170.187.162','www.biblichor.website','biblichor.website']
 
 
 # Application definition
