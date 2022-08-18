@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import django_heroku
 import dj_database_url
 from decouple import config
 from pathlib import Path
@@ -27,7 +26,7 @@ SECRET_KEY = 'unyuizi@0g(7dnpu53hvb0*v2p746th0jqku-%ag59d@_(70&c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.36.9.207']
+ALLOWED_HOSTS = ['127.0.0.1','13.40.96.175']
 
 
 # Application definition
@@ -86,12 +85,8 @@ AUTH_USER_MODEL= 'accounts.Account'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_project',
-        'USER': 'username',
-        'PASSWORD': 'pass1234',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -148,7 +143,7 @@ EMAIL_HOST_PASSWORD="mnvlnpvwxoaqegzw"
 EMAIL_USE_TLS=True
 
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 
 
