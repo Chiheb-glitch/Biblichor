@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Account,UserProfile
+from .models import Account,UserProfile,ChangepasswordModel
 
 
 
@@ -76,3 +76,27 @@ class UserProfileForm1(forms.ModelForm):
 			self.fields['etat'].widget.attrs["Placeholder"]=" Etat "
 			self.fields['codepostal'].widget.attrs["Placeholder"]="Code postal"
 			self.fields['address_line_2'].required=False
+
+
+class UserProfileChangePasswordForm(forms.ModelForm):
+	password=forms.CharField(widget=forms.PasswordInput(attrs={
+		'Placeholder':'Mot de passe'
+		}))
+	verif_password=forms.PasswordInput()
+	class Meta:
+		model=ChangepasswordModel
+		fields=('password','verify_password')
+
+	
+	#def __init__(self,*args,**kwargs):
+	def clean(self):
+		clean_data=super(RegistrationForm,self).clean()
+		password = clean_data.get('password')
+		verify_password=clean_data.get('verify_password')
+
+		if password  != confirm_password :
+
+			raise forms.ValidationError(
+				'Mot de passes non compatibles',code="20"
+				)
+		

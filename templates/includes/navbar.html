@@ -194,7 +194,7 @@ margin-right: 0;
 				"> Account</a>
             <div class="dropdown-content">
                 <a ><img src="{% static './icon/Purchase.png' %}" style="width:20px; margin: 5px;" alt="">Purchase & Reviews</a>
-                <a href="#"><img src="{% static './icon/settings.png' %}" style="width:20px; margin: 5px;" alt="">Account Settings</a>
+                <a href="{% url 'edit_profile_account' %}"><img src="{% static './icon/settings.png' %}" style="width:20px; margin: 5px;" alt="">Account Settings</a>
                 <a href="{% url 'dashboard' username=user.username %}"><img src="{% static './icon/dashboard.png' %}" style="width:20px; margin: 5px;" alt="">Dashboard</a>
                 <a href="{% url 'logout' %}"><img src="{% static './icon/sign-out.png' %}" style="width:20px; margin: 5px;" alt="">Sign Out</a>
             </div>

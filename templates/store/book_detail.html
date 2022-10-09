@@ -185,6 +185,21 @@ $(document).ready(function() {
 	</div> <!-- row.// -->
 	<hr>
 	<div class="tessqt" style="text-align:center ;">
+{% if user.id is  None %} 
+
+<a href="/accounts/login/next?category=single_book.category.Category_name" class="btn  btn-primary"style="
+		padding-left: 20%;
+		padding-right: 20%;
+	">  
+	<span class="text"> Login </span> <i class="fas fa-shopping-cart"></i> 
+
+ </a>
+
+
+{% else %}
+
+
+
 		{% if single_book.user != user %}
 		{% if single_book.code_a_barre in list_code  %}
 		<a href="{% url 'add_cart' code_a_barre=single_book.code_a_barre %}" class="btn  btn-primary"style="
@@ -200,6 +215,8 @@ $(document).ready(function() {
 	{% else %}
 	<p>   raw ktebek ya m3alem </p>
 	{%  endif %}
+{%  endif %}
+
 	</div>
 
 </article> <!-- product-info-aside .// -->

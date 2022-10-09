@@ -119,3 +119,9 @@ class ReviewRationg(models.Model):
 	username_add_to=models.CharField(max_length=50,blank=False,default="none")
 	def __str__(self):
 		return self.user.username
+
+
+class ChangepasswordModel(models.Model):
+	password=models.CharField(max_length=100)
+	verify_password=models.CharField(max_length=100)
+	

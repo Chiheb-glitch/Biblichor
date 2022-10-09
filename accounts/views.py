@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect,get_object_or_404
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm ,UserProfileForm , UserProfileForm1 
+from .forms import RegistrationForm ,UserProfileForm , UserProfileForm1 ,UserProfileChangePasswordForm
 from .models import Account , UserProfile ,ReviewRationg
 from django.http import HttpResponse  ,HttpResponseRedirect
 from book.models import Book
@@ -358,3 +358,180 @@ def resetPassword(request):
 			return render(request,'accounts/resetPassword.html')
 	else:
 		return render(request , 'accounts/resetPassword.html')
+
+
+@login_required(login_url='login')
+def edit_profile_account ( request):
+	x=UserProfile.objects.get(user=request.user)
+	y=Account.objects.get(email=request.user.email)
+	if request.method == 'POST':
+		
+		k=Account.objects.all()
+		
+		b=False
+		for i in k :
+			if i.username == request.POST['username']:
+				b=True
+		if b :
+			messages.error(request,'mawjoud baba')
+		else:
+			if request.POST['username'] != '':
+				y.username=request.POST['username']
+				y.save()
+				messages.success(request,'sa7ti')
+
+        
+		x.description=request.POST['description']
+		if   'picture1' in request.FILES :
+			print('ok')
+			if request.POST['instagram'] != '': 
+				x.instagram=request.POST['instagram']
+			if request.POST['facebook'] != '':
+				x.facebook=request.POST['facebook']
+			
+			if request.POST['Wattpad'] != '':
+				x.whattpad=request.POST['Wattpad']
+
+			if request.POST['goodreads']	 != '':
+				x.goodreads=request.POST['goodreads']			
+			if request.POST['description'] != '':
+				x.description=request.POST['description']
+			x.profile_picture=request.FILES['picture1']
+			
+			
+			
+			
+			x.save()
+			messages.success(request,'work done')
+		else:
+			if request.POST['description'] != '' :
+				x.description=request.POST['description']			
+			if request.POST['instagram'] != '':
+				x.instagram=request.POST['instagram']
+			if request.POST['facebook'] != '':
+				x.facebook=request.POST['facebook']
+			
+			if request.POST['Wattpad'] != '':
+				x.whattpad=request.POST['Wattpad']
+
+			if request.POST['goodreads']	 != '':
+				x.goodreads=request.POST['goodreads']	
+			x.save()
+			messages.success(request,'work done')
+
+
+		
+
+	context={
+	'x':x,'y':y
+	}
+
+	return render (request ,'accounts/edit_profile_account.html',context)
+
+
+def edit_profile_security (request):
+    
+
+
+
+	return render(request ,'accounts/edit_profile_security.html')
+def edit_profile_security_password (request):
+	user=Account.objects.get(username=request.user.username)
+	if request.method == "POST" :
+		current_password= request.POST['current_password']
+		new_password=request.POST['new_password']
+		verify_password=request.POST['verify_password']
+		if new_password == verify_password:
+			success = user.check_password(current_password)
+			if success :
+				user.set_password(new_password)
+				user.save()
+				messages.success(request,'password udated success')
+			else :
+				messages.error(request ,'please enter valid current password!!')
+		else:
+			messages.error(request,'passdoes not match')
+	
+
+
+
+	return render(request ,'accounts/edit_profile_security.html')
+
+
+
+
+
+
+def edit_profile_security_email(request):
+	user=Account.objects.get(username=request.user.username)
+	print(request.POST)
+	if request.method == "POST":
+		new_email=request.POST['new_email']
+		verify_email=request.POST['verify_email']
+		password=request.POST['password']
+		print(new_email == verify_email)
+
+		success= user.check_password(password)
+		print(success)
+		print(new_email == verify_email)
+		if new_email == verify_email :
+			if success:
+				user.email=new_email
+				user.save()
+				messages.success(request,'email updated succes')
+			else :
+				messages.error(request,'please enter valid password')
+		else:
+			messages.error(request,"new email dont match verify  email")
+
+
+
+
+
+	return render( request ,'accounts/edit_profile_security.html')
+
+
+def edit_profile_security_phone(request):
+	user=Account.objects.get(username=request.user.username)
+	if request.method == 'POST':
+		new_phone=request.POST['new_phone']
+		verify_phone=request.POST['verify_phone']
+		password=request.POST['password']
+		if new_phone == verify_phone:
+			success=user.check_password(password)
+			if success:
+				profile=UserProfile.objects.get(user=user)
+				profile.phone_number=new_phone
+				profile.save()
+				messages.success(request,'phone number updated succes')
+			else:
+				messages.error(request ,' please enter valid password')
+		else:
+			messages.error(request,'new phone number dont match with verify ')
+
+	return render(request ,'accounts/edit_profile_security.html')
+
+
+
+
+def edit_profile_adress(request):
+	user=Account.objects.get(username=request.user.username)
+	profile=UserProfile.objects.get(user=user)
+	if request.method == 'POST':
+		adress1=request.POST['adress1']
+		adress2=request.POST['adress2']
+		city=request.POST['city']
+		state=request.POST['state']
+		zipecode=request.POST['zipecode']
+		print(request.POST)
+		
+		profile.address_line_1=adress1
+		profile.address_line_2=adress2
+		profile.vilee=city
+		profile.etat=state
+		profile.codepostal=zipecode
+		profile.save()	
+
+	
+
+	return render(request ,'accounts/edit_profile_adress.html',{'profile':profile})	
